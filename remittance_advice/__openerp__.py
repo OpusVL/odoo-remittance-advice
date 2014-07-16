@@ -30,6 +30,7 @@
     'website': 'http://opusvl.com',
     'depends': ['account_voucher'],
     'data': [
+        'report_remittance_advice.xml',
     ],
     'demo': [],
     'test': [],

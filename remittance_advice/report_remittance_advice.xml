@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="report_remittance_advice_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="row">
+                <div id="partner-address-block" class="col-xs-5 col-xs-offset-7">
+                    <address
+                        id="partner-address-field"
+                        t-field="o.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    />
+                    <span id="partner-address-vat-field"
+                          t-field="o.partner_id.vat"
+                    />
+                </div>
+            </div>
+            <h2 id="main-heading">
+                REMITTANCE ADVICE
+            </h2>
+            <div class="row mt32 mb32">
+                <div class="col-xs-3" t-if="o.name">
+                    <strong>Memo:</strong>
+                    <p t-field="o.name"/>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+<template id="report_remittance_advice">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'remittance_advice.report_remittance_advice_document')"/>
+        </t>
+    </t>
+</template>
+
+        <report 
+            id="remittance_advices"
+            model="account.voucher"
+            string="Remittance Advice"
+            report_type="qweb-pdf"
+            name="remittance_advice.report_remittance_advice"
+            file="remittance_advice.report_remittance_advice"
+            attachment_use="True"
+            attachment="(object.state in ('open','paid')) and ('REMITTANCE'+(object.number or '').replace('/','')+'.pdf')"
+        />
+
+</data>
+</openerp>
