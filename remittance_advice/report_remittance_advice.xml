@@ -18,7 +18,14 @@
                 </div>
             </div>
             <h2 id="main-heading">
-                REMITTANCE ADVICE
+                <t t-if="o.state == 'draft'">DRAFT Payment</t>
+                <t t-if="o.state == 'cancel'">CANCELLED Payment</t>
+                <t t-if="o.state == 'proforma'">PRO-FORMA Payment</t>
+                <t t-if="o.state == 'posted'">
+                    <t t-if="o.type == 'purchase'"> REMITTANCE ADVICE </t>
+                    <t t-if="o.type != 'purchase'"> RECEIPT OF PAYMENT </t>
+                </t>
+                <t t-if="o.number"> #: <span t-field="o.number"/></t>
             </h2>
             <div class="row mt32 mb32">
                 <div class="col-xs-3" t-if="o.name">
