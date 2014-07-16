@@ -22,8 +22,8 @@
                 <t t-if="o.state == 'cancel'">CANCELLED Payment</t>
                 <t t-if="o.state == 'proforma'">PRO-FORMA Payment</t>
                 <t t-if="o.state == 'posted'">
-                    <t t-if="o.type == 'purchase'"> REMITTANCE ADVICE </t>
-                    <t t-if="o.type != 'purchase'"> RECEIPT OF PAYMENT </t>
+                    <t t-if="o.type == 'payment'"> REMITTANCE ADVICE </t>
+                    <t t-if="o.type != 'payment'"> RECEIPT OF PAYMENT </t>
                 </t>
                 <t t-if="o.number"> #: <span t-field="o.number"/></t>
             </h2>
@@ -33,6 +33,36 @@
                     <p t-field="o.name"/>
                 </div>
             </div>
+            <t  t-set="lines"
+                t-value="o.line_dr_ids if o.type == 'payment' else o.line_cr_ids"
+            />
+            <t  t-set="display_lines"
+                t-value="filter(lambda l: l.amount != 0, lines)"
+            />
+            <table id="lines-table" class="table table-condensed">
+                <thead>
+                    <th id="lines-colhd-item">Item</th>
+                    <th id="lines-colhd-date">Date</th>
+                    <th id="lines-colhd-orig-amt">Original Amount</th>
+                    <th id="lines-colhd-amt-paid">Amount Paid</th>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr t-foreach="display_lines" t-as='l'>
+                        <td id="lines-cell-item">
+                            <span t-field="l.move_line_id"/>
+                        </td>
+                        <td id="lines-cell-date">
+                            <span t-field="l.date_original"/>
+                        </td>
+                        <td id="lines-cell-orig-amt">
+                            <span t-field="l.amount_original"/>
+                        </td>
+                        <td id="lines-cell-amt-paid">
+                            <span t-field="l.amount"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </t>
 </template>
