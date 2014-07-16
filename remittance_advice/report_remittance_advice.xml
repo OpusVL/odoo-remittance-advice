@@ -37,16 +37,16 @@
     </t>
 </template>
 
-        <report 
-            id="remittance_advices"
-            model="account.voucher"
-            string="Remittance Advice"
-            report_type="qweb-pdf"
-            name="remittance_advice.report_remittance_advice"
-            file="remittance_advice.report_remittance_advice"
-            attachment_use="True"
-            attachment="(object.state in ('open','paid')) and ('REMITTANCE'+(object.number or '').replace('/','')+'.pdf')"
-        />
+<report 
+    id="remittance_advices"
+    model="account.voucher"
+    string="Remittance Advice"
+    report_type="qweb-pdf"
+    name="remittance_advice.report_remittance_advice"
+    file="remittance_advice.report_remittance_advice"
+    attachment_use="True"
+    attachment="(object.state in ('open','paid')) and ('REMITTANCE'+(object.number or '').replace('/','')+'.pdf')"
+/>
 
 </data>
 </openerp>
