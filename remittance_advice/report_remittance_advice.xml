@@ -35,9 +35,11 @@
             </div>
             <t  t-set="lines"
                 t-value="o.line_dr_ids if o.type == 'payment' else o.line_cr_ids"
+                id="lines-getter"
             />
             <t  t-set="display_lines"
                 t-value="filter(lambda l: l.amount != 0, lines)"
+                id="lines-filter"
             />
             <table id="lines-table" class="table table-condensed">
                 <thead>
@@ -48,16 +50,16 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="display_lines" t-as='l'>
-                        <td id="lines-cell-item">
+                        <td class="lines-cell-item">
                             <span t-field="l.move_line_id"/>
                         </td>
-                        <td id="lines-cell-date">
+                        <td class="lines-cell-date">
                             <span t-field="l.date_original"/>
                         </td>
-                        <td id="lines-cell-orig-amt">
+                        <td class="lines-cell-orig-amt">
                             <span t-field="l.amount_original"/>
                         </td>
-                        <td id="lines-cell-amt-paid">
+                        <td class="lines-cell-amt-paid">
                             <span t-field="l.amount"/>
                         </td>
                     </tr>
