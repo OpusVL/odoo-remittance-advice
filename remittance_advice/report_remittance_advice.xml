@@ -18,14 +18,14 @@
                 </div>
             </div>
             <h2 id="main-heading">
-                <t t-if="o.state == 'draft'">DRAFT Payment</t>
-                <t t-if="o.state == 'cancel'">CANCELLED Payment</t>
-                <t t-if="o.state == 'proforma'">PRO-FORMA Payment</t>
+                <t t-if="o.state == 'draft'">DRAFT Remittance</t>
+                <t t-if="o.state == 'cancel'">CANCELLED Remittance</t>
+                <t t-if="o.state == 'proforma'">PRO-FORMA Remittance</t>
                 <t t-if="o.state == 'posted'">
                     <t t-if="o.type == 'payment'"> REMITTANCE ADVICE </t>
                     <t t-if="o.type != 'payment'"> RECEIPT OF PAYMENT </t>
                 </t>
-                <t t-if="o.number"> #: <span t-field="o.number"/></t>
+                <t t-if="o.number"><span t-field="o.number"/></t>
             </h2>
             <div class="row mt32 mb32">
                 <div class="col-xs-3" t-if="o.name">
@@ -33,38 +33,57 @@
                     <p t-field="o.name"/>
                 </div>
             </div>
-            <t  t-set="lines"
-                t-value="o.line_dr_ids if o.type == 'payment' else o.line_cr_ids"
-                id="lines-getter"
-            />
             <t  t-set="display_lines"
-                t-value="filter(lambda l: l.amount != 0, lines)"
-                id="lines-filter"
+                t-value="filter(lambda l: l.amount != 0, o.line_ids)"
+                id="lines-getter"
             />
             <table id="lines-table" class="table table-condensed">
                 <thead>
-                    <th id="lines-colhd-item">Item</th>
                     <th id="lines-colhd-date">Date</th>
-                    <th id="lines-colhd-orig-amt">Original Amount</th>
-                    <th id="lines-colhd-amt-paid">Amount Paid</th>
+                    <th id="lines-colhd-ref">Reference</th>
+                    <th id="lines-colhd-debit">Debit</th>
+                    <th id="lines-colhd-credit">Credit</th>
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="display_lines" t-as='l'>
-                        <td class="lines-cell-item">
-                            <span t-field="l.move_line_id"/>
-                        </td>
                         <td class="lines-cell-date">
                             <span t-field="l.date_original"/>
                         </td>
-                        <td class="lines-cell-orig-amt">
-                            <span t-field="l.amount_original"/>
+                        <td class="lines-cell-ref">
+                            <span t-field="l.move_line_id"/>
                         </td>
-                        <td class="lines-cell-amt-paid">
-                            <span t-field="l.amount"/>
+                        <td class="lines-cell-debit">
+                            <t t-if="l['type'] == 'cr'"> <!-- credit to us, debit to recipient -->
+                                <span t-field="l.amount"/>
+                            </t>
+                        </td>
+                        <td class="lines-cell-credit">
+                            <t t-if="l['type'] == 'dr'"> <!-- debit to us, credit to recipient -->
+                                <span t-field="l.amount"/>
+                            </t>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div id="total-row" class="row">
+                <div id="total-box" class="col-xs-4 pull-right">
+                    <table id="total-table" class="table table-condensed">
+                        <tr id="total-table-row" class="border-black">
+                            <td id="total-label-cell">
+                                <strong id="total-label">
+                                    PAID:
+                                </strong>
+                            </td>
+                            <td id="total-value-cell">
+                                <strong id="total-value">
+                                    <span t-field="o.amount"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </t>
 </template>
