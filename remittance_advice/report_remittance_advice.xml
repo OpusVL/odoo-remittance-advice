@@ -111,7 +111,7 @@
     name="remittance_advice.report_remittance_advice"
     file="remittance_advice.report_remittance_advice"
     attachment_use="True"
-    attachment="(object.state in ('open','paid')) and ('REMITTANCE'+(object.number or '').replace('/','')+'.pdf')"
+    attachment="(object.state == 'posted') and ('REMITTANCE'+(object.number or '').replace('/','')+'.pdf')"
 />
 
 </data>
