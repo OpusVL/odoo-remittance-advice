@@ -6,7 +6,10 @@
     <t t-call="report.external_layout">
         <div class="page">
             <div class="row">
-                <div id="partner-address-block" class="col-xs-5 col-xs-offset-7">
+                <div id="left-of-partner-address" class="col-xs-6">
+                    <!-- for inheriting templates to populate -->
+                </div>
+                <div id="partner-address-block" class="col-xs-6">
                     <address
                         id="partner-address-field"
                         t-field="o.partner_id"
@@ -75,7 +78,10 @@
             </table>
 
             <div id="total-row" class="row">
-                <div id="total-box" class="col-xs-4 pull-right">
+                <div id="left-of-total-box" class="col-xs-8">
+                    <!-- For inheriting templates to populate -->
+                </div>
+                <div id="total-box" class="col-xs-4">
                     <table id="total-table" class="table table-condensed">
                         <tr id="total-table-row" class="border-black">
                             <td id="total-label-cell">
