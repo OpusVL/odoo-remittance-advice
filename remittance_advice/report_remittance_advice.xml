@@ -28,8 +28,16 @@
                 <t t-if="o.number"><span t-field="o.number"/></t>
             </h2>
             <div class="row mt32 mb32">
-                <div class="col-xs-3" t-if="o.name">
-                    <strong>Memo:</strong>
+                <div id="date-block" class="col-xs-3 text-center" t-if="o.date">
+                    <strong id="date-label">Date:</strong>
+                    <p t-field="o.date"/>
+                </div>
+                <div id="reference-block" class="col-xs-3 text-center" t-if="o.reference">
+                    <strong id="reference-label">Payment Ref:</strong>
+                    <p t-field="o.reference"/>
+                </div>
+                <div id="memo-block" class="col-xs-3 text-center" t-if="o.name">
+                    <strong id="memo-label">Memo:</strong>
                     <p t-field="o.name"/>
                 </div>
             </div>
