@@ -22,7 +22,7 @@
 
 {
     'name': 'Remittance Advice',
-    'version': '0.2',
+    'version': '0.3',
     'category': 'Accounting & Finance',
     'summary': 'Add a Remittance Advice print option to Supplier Payment vouchers',
     'description': """Add a Remittance Advice print option to Supplier Payment vouchers""",
