@@ -90,7 +90,7 @@
                         <tr id="total-table-row" class="border-black">
                             <td id="total-label-cell">
                                 <strong id="total-label">
-                                    PAID:
+                                    PAID (<span t-field="o.currency_id.display_name"/>):
                                 </strong>
                             </td>
                             <td id="total-value-cell">
