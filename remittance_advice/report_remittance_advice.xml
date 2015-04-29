@@ -56,6 +56,7 @@
                 <thead>
                     <th id="lines-colhd-date">Date</th>
                     <th id="lines-colhd-ref">Reference</th>
+                    <th id="lines-colhd-yourref">Your Reference</th>
                     <th id="lines-colhd-currency">Currency</th>
                     <th id="lines-colhd-debit">Debit</th>
                     <th id="lines-colhd-credit">Credit</th>
@@ -67,6 +68,9 @@
                         </td>
                         <td class="lines-cell-ref">
                             <span t-field="l.move_line_id"/>
+                        </td>
+                        <td class="lines-cell-yourref">
+                            <span t-field="l.move_line_id.invoice.name"/>
                         </td>
                         <td class="lines-cell-currency">
                             <span t-field="l.currency_id.display_name"/>
