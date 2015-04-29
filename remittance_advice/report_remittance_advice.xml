@@ -35,6 +35,10 @@
                     <strong id="date-label">Date:</strong>
                     <p t-field="o.date"/>
                 </div>
+                <div id="account-block" class="col-xs-3 text-center" t-if="o.partner_id.ref">
+                    <strong id="account-label">Account:</strong>
+                    <p t-field="o.partner_id.ref"/>
+                </div>
                 <div id="reference-block" class="col-xs-3 text-center" t-if="o.reference">
                     <strong id="reference-label">Payment Ref:</strong>
                     <p t-field="o.reference"/>
