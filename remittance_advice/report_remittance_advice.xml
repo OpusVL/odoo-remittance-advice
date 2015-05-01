@@ -30,7 +30,7 @@
                 </t>
                 <t t-if="o.number"><span t-field="o.number"/></t>
             </h2>
-            <div class="row mt32 mb32">
+            <div name="voucher-info-row" class="row mt32 mb32"> <!-- NOTE: Use name= in future, not id= -->
                 <div id="date-block" class="col-xs-3 text-center" t-if="o.date">
                     <strong id="date-label">Date:</strong>
                     <p t-field="o.date"/>
