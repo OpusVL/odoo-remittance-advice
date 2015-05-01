@@ -58,8 +58,8 @@
                     <th id="lines-colhd-ref">Our Reference</th>
                     <th id="lines-colhd-yourref">Your Reference</th>
                     <th id="lines-colhd-currency">Currency</th>
-                    <th id="lines-colhd-debit">Debit</th>
-                    <th id="lines-colhd-credit">Credit</th>
+                    <th class="text-right" id="lines-colhd-debit">Debit</th>
+                    <th class="text-right" id="lines-colhd-credit">Credit</th>
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="display_lines" t-as='l'>
@@ -76,12 +76,12 @@
                         <td class="lines-cell-currency">
                             <span t-field="l.currency_id.display_name"/>
                         </td>
-                        <td class="lines-cell-debit">
+                        <td class="lines-cell-debit text-right">
                             <t t-if="l['type'] == 'cr'"> <!-- credit to us, debit to recipient -->
                                 <span t-field="l.amount"/>
                             </t>
                         </td>
-                        <td class="lines-cell-credit">
+                        <td class="lines-cell-credit text-right">
                             <t t-if="l['type'] == 'dr'"> <!-- debit to us, credit to recipient -->
                                 <span t-field="l.amount"/>
                             </t>
@@ -102,7 +102,7 @@
                                     PAID (<span t-field="o.currency_id.display_name"/>):
                                 </strong>
                             </td>
-                            <td id="total-value-cell">
+                            <td id="total-value-cell" class="text-right">
                                 <strong id="total-value">
                                     <span t-field="o.amount"/>
                                 </strong>
