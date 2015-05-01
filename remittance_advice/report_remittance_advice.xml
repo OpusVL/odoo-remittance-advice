@@ -63,6 +63,7 @@
                 </thead>
                 <tbody class="invoice_tbody">
                     <tr t-foreach="display_lines" t-as='l'>
+                        <t t-set="invoice" t-value="l.move_line_id.invoice"/>
                         <td class="lines-cell-date">
                             <span t-field="l.date_original"/>
                         </td>
@@ -70,7 +71,7 @@
                             <span t-field="l.move_line_id"/>
                         </td>
                         <td class="lines-cell-yourref">
-                            <span t-field="l.move_line_id.invoice.name"/>
+                            <span t-esc="invoice.supplier_invoice_number if o.type == 'payment' else invoice.name"/>
                         </td>
                         <td class="lines-cell-currency">
                             <span t-field="l.currency_id.display_name"/>
