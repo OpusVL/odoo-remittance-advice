@@ -32,7 +32,10 @@
     'version': '0.3',
     'category': 'Accounting & Finance',
     'summary': 'Add a Remittance Advice print option to Supplier Payment vouchers',
-    'description': """Add a Remittance Advice print option to Supplier Payment vouchers""",
+    'description': """Add a Remittance Advice print option to Supplier Payment vouchers.
+    
+The value for Your Reference in the table comes from the Supplier Invoice Number on the relevant invoice.
+    """,
     'author': 'OpusVL',
     'website': 'http://opusvl.com',
     'depends': ['account_voucher'],
