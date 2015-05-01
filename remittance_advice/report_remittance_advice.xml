@@ -55,7 +55,7 @@
             <table id="lines-table" class="table table-condensed">
                 <thead>
                     <th id="lines-colhd-date">Date</th>
-                    <th id="lines-colhd-ref">Reference</th>
+                    <th id="lines-colhd-ref">Our Reference</th>
                     <th id="lines-colhd-yourref">Your Reference</th>
                     <th id="lines-colhd-currency">Currency</th>
                     <th id="lines-colhd-debit">Debit</th>
