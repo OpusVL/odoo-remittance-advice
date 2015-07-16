@@ -38,7 +38,10 @@ The value for Your Reference in the table comes from the Supplier Invoice Number
     """,
     'author': 'OpusVL',
     'website': 'http://opusvl.com',
-    'depends': ['account_voucher'],
+    'depends': [
+        'account_voucher',
+        'base',
+    ],
     'data': [
         'report_remittance_advice.xml',
     ],
