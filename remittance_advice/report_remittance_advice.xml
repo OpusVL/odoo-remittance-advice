@@ -83,12 +83,12 @@
                         </td>
                         <td name="lines-cell-debit" class="lines-cell-debit text-right">
                             <t t-if="l['type'] == 'cr'"> <!-- credit to us, debit to recipient -->
-                                <span t-field="l.amount"/>
+                                <span name="lines-debit-span" t-field="l.amount"/>
                             </t>
                         </td>
                         <td name="lines-cell-credit" class="lines-cell-credit text-right">
                             <t t-if="l['type'] == 'dr'"> <!-- debit to us, credit to recipient -->
-                                <span t-field="l.amount"/>
+                                <span name="lines-credit-span" t-field="l.amount"/>
                             </t>
                         </td>
                     </tr>
