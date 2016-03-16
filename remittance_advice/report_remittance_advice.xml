@@ -2,10 +2,20 @@
 <openerp>
 <data>
 
+<template id="report_part_title">
+    <t t-if="o.state == 'draft'">DRAFT Remittance</t>
+    <t t-if="o.state == 'cancel'">CANCELLED Remittance</t>
+    <t t-if="o.state == 'proforma'">PRO-FORMA Remittance</t>
+    <t t-if="o.state == 'posted'">
+        <t t-if="o.type == 'payment'"> REMITTANCE ADVICE </t>
+        <t t-if="o.type != 'payment'"> RECEIPT OF PAYMENT </t>
+    </t>
+    <t t-if="ra_print_number_after_title"><span t-field="o.number"/></t>
+</template>
 <template id="report_remittance_advice_document">
     <t t-call="report.external_layout">
         <div class="page">
-            <div class="row">
+            <div name="top_matter_row" class="row">
                 <div id="left-of-partner-address" class="col-xs-8">
                     <!-- for inheriting templates to populate -->
                 </div>
@@ -20,15 +30,10 @@
                     />
                 </div>
             </div>
-            <h2 id="main-heading">
-                <t t-if="o.state == 'draft'">DRAFT Remittance</t>
-                <t t-if="o.state == 'cancel'">CANCELLED Remittance</t>
-                <t t-if="o.state == 'proforma'">PRO-FORMA Remittance</t>
-                <t t-if="o.state == 'posted'">
-                    <t t-if="o.type == 'payment'"> REMITTANCE ADVICE </t>
-                    <t t-if="o.type != 'payment'"> RECEIPT OF PAYMENT </t>
+            <h2 name="main_heading" id="main-heading">
+                <t t-call="remittance_advice.report_part_title">
+                    <t t-set="ra_print_number_after_title" t-value="True"/>
                 </t>
-                <t t-if="o.number"><span t-field="o.number"/></t>
             </h2>
             <div name="voucher-info-row" class="row mt32 mb32"> <!-- NOTE: Use name= in future, not id= -->
                 <div id="date-block" class="col-xs-3 text-center" t-if="o.date">
@@ -57,7 +62,7 @@
                     <th id="lines-colhd-date">Date</th>
                     <th id="lines-colhd-ref">Our Reference</th>
                     <th id="lines-colhd-yourref">Your Reference</th>
-                    <th id="lines-colhd-currency">Currency</th>
+                    <th name="lines-colhd-currency" id="lines-colhd-currency">Currency</th>
                     <th class="text-right" id="lines-colhd-debit">Debit</th>
                     <th class="text-right" id="lines-colhd-credit">Credit</th>
                 </thead>
@@ -73,15 +78,15 @@
                         <td class="lines-cell-yourref">
                             <span t-esc="invoice.supplier_invoice_number if o.type == 'payment' else invoice.name"/>
                         </td>
-                        <td class="lines-cell-currency">
+                        <td name="lines-cell-currency" class="lines-cell-currency">
                             <span t-field="l.currency_id.display_name"/>
                         </td>
-                        <td class="lines-cell-debit text-right">
+                        <td name="lines-cell-debit" class="lines-cell-debit text-right">
                             <t t-if="l['type'] == 'cr'"> <!-- credit to us, debit to recipient -->
                                 <span t-field="l.amount"/>
                             </t>
                         </td>
-                        <td class="lines-cell-credit text-right">
+                        <td name="lines-cell-credit" class="lines-cell-credit text-right">
                             <t t-if="l['type'] == 'dr'"> <!-- debit to us, credit to recipient -->
                                 <span t-field="l.amount"/>
                             </t>
@@ -95,7 +100,7 @@
                     <!-- For inheriting templates to populate -->
                 </div>
                 <div id="total-block" class="col-xs-4">
-                    <table id="total-table" class="table table-condensed">
+                    <table name="total_table" id="total-table" class="table table-condensed">
                         <tr id="total-table-row" class="border-black">
                             <td id="total-label-cell">
                                 <strong id="total-label">
